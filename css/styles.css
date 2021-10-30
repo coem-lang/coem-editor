@@ -1,0 +1,63 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  font-family: "Gentium Book Basic", serif;
+}
+
+/*
+      ___       __   ___  __
+|__| |__   /\  |  \ |__  |__)
+|  | |___ /~~\ |__/ |___ |  \
+
+*/
+
+header {
+  padding: 10px;
+}
+
+.title {
+  margin: 0;
+}
+
+/*
+
+ |\/|  /\  | |\ |
+ |  | /~~\ | | \|
+
+*/
+
+main {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  padding: 10px;
+}
+
+.textarea {
+  border: 1px solid #ccc;
+  height: 100%;
+  padding: 10px;
+  /* letter-spacing: 1px; */
+}
+
+/*
+ ___  __   __  ___  ___  __
+|__  /  \ /  \  |  |__  |__)
+|    \__/ \__/  |  |___ |  \
+
+*/
+
+footer {
+  padding: 10px;
+}
