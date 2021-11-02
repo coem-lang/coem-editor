@@ -1,0 +1,9 @@
+#using palimpsest
+
+let me|I;
+
+I am "here";
+I am "open";
+I am "listening";
+
+print I;
