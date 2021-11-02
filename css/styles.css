@@ -13,7 +13,7 @@ body {
   height: 100%;
   display: grid;
   grid-template-rows: auto 1fr auto;
-  font-family: "Gentium Book Basic", serif;
+  font-family: "Adobe Caslon Pro", serif;
 }
 
 /*
@@ -24,11 +24,58 @@ body {
 */
 
 header {
-  padding: 10px;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 20px;
 }
 
 .title {
   margin: 0;
+}
+
+.nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.nav__items {
+  margin: 0;
+  display: flex;
+}
+
+.nav__item button {
+  border: 0;
+  padding: 10px;
+  font-family: "Adobe Caslon Pro", serif;
+  background: none;
+}
+
+.nav__item > button:hover,
+.nav__item--open > button {
+  background-color: #eee;
+}
+
+.nav__dropdown {
+  position: absolute;
+  display: none;
+  z-index: 5;
+  box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+}
+
+.nav__item--open .nav__dropdown {
+  display: block;
+}
+
+.nav__dropdown .nav__dropdown-item button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background-color: #eee;
+}
+
+.nav__dropdown .nav__dropdown-item button:hover {
+  background-color: #ccc;
 }
 
 /*
@@ -40,15 +87,19 @@ header {
 
 main {
   display: grid;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: 25% 50%;
   padding: 10px;
 }
 
-.textarea {
-  border: 1px solid #ccc;
+.CodeMirror {
   height: 100%;
-  padding: 10px;
   /* letter-spacing: 1px; */
+  font-family: "Adobe Caslon Pro", serif;
+}
+
+.output {
+  white-space: pre;
+  /* line-height: 1.15; */
 }
 
 /*
