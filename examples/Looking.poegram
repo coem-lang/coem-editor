@@ -12,13 +12,13 @@ let mou?rning be "dark";
 print morning is mourning;
 
 let answer be nothing;
-  print answer;
+    print answer;
 let answer be "this";
-  print answer;
+    print answer;
 let answer be "that";
-  print answer;
+    print answer;
 let answer be 42;
-  print answer;
+    print answer;
 
 let you be "here";
 let answer be you;

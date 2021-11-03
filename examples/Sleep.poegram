@@ -1,10 +1,10 @@
 to sleep():
-  return dream();
+    return dream();
 
 to dream():
-  sometimes:
-    return "dreams";
-  othertimes:
-    return "nightmares";
+    sometimes:
+        return "dreams";
+    othertimes:
+        return "nightmares";
 
 print sleep();
