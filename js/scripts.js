@@ -1,7 +1,9 @@
 const menuBtns = document.querySelectorAll(".nav__item > button"),
   outputArea = document.querySelector(".output"),
   filenameTitle = document.querySelector("h2 .filename-title"),
-  tocBtns = document.querySelectorAll(".toc__item button");
+  tocItems = document.querySelector(".toc__items"),
+  tocBtns = document.querySelectorAll(".toc__item button"),
+  newBtn = document.querySelector("#newBtn");
 let editor,
   isMenuOpen = false,
   currentTitle;
@@ -10,23 +12,51 @@ let editor,
 
 function onMenuBtnClick(e) {
   e.preventDefault();
-  isMenuOpen = e.target.parentElement.classList.toggle("nav__item--open");
+  let btn = e.currentTarget;
+  isMenuOpen = btn.parentElement.classList.toggle("nav__item--open");
 }
 
 function onMenuBtnMouseover(e) {
   e.preventDefault();
+  let btn = e.currentTarget;
   if (isMenuOpen) {
     for (let b of menuBtns) {
       b.parentElement.classList.remove("nav__item--open");
     }
-    e.target.parentElement.classList.add("nav__item--open");
-    e.target.focus();
+    btn.parentElement.classList.add("nav__item--open");
+    btn.focus();
   }
 }
 
 function onMenuBtnBlur(e) {
+  // e.preventDefault();
+  // let btn = e.currentTarget;
+  // btn.parentElement.classList.remove("nav__item--open");
+}
+
+function onNewBtnClick(e) {
   e.preventDefault();
-  e.target.parentElement.classList.remove("nav__item--open");
+  let btn = e.currentTarget;
+  btn.parentElement.parentElement.parentElement.classList.remove("nav__item--open");
+  isMenuOpen = false;
+  createNewFile();
+}
+
+function clear() {
+  editor.getDoc().setValue("");
+  outputArea.innerHTML = "";
+  for (let btn of tocBtns) {
+    btn.parentElement.classList.remove("current");
+  }
+}
+
+function createNewFile() {
+  clear();
+  let tocItem = document.querySelector(".toc__item").cloneNode(true);
+  filenameTitle.innerText = "Untitled";
+  currentTitle = filenameTitle;
+  tocItem.querySelector(".filename-title").innerText = "Untitled";
+  tocItems.appendChild(tocItem);
 }
 
 // TOC
@@ -75,6 +105,12 @@ document.addEventListener("DOMContentLoaded", () => {
     button.addEventListener("mouseover", onMenuBtnMouseover);
     button.addEventListener("blur", onMenuBtnBlur);
   });
+
+  newBtn.addEventListener("click", onNewBtnClick);
+  // newBtn.addEventListener("click", e => {
+  //   e.preventDefault();
+  //   console.log(e);
+  // });
 
   tocBtns.forEach(btn => {
     btn.addEventListener("click", onTocBtnClick);

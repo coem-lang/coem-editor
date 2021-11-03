@@ -31,7 +31,8 @@ button {
 header {
   margin: 20px 100px;
   display: grid;
-  grid-template-columns: 340px 1fr;
+  grid-template-columns: 20% 1fr;
+  gap: 20px;
 }
 
 .title {
@@ -47,6 +48,7 @@ header {
 .nav__items {
   margin: 0;
   display: flex;
+  margin-left: 25px;
 }
 
 .nav__item button {
