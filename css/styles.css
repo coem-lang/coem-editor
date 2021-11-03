@@ -19,6 +19,7 @@ body {
 button {
   cursor: pointer;
   font-family: "IBM Plex Serif", serif;
+  font-size: 1em;
 }
 
 /*
