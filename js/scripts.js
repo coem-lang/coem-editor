@@ -71,12 +71,12 @@ function onTocBtnClick(e) {
 
 function load(filename) {
   Promise.all([
-    fetch("examples/" + filename + ".poegram"),
+    fetch("examples/" + filename + ".coem"),
     fetch("examples/" + filename + ".output")
   ])
   .then(results => Promise.all(results.map(r => r.text())))
-  .then(([poegram, output]) => {
-    editor.getDoc().setValue(poegram);
+  .then(([coem, output]) => {
+    editor.getDoc().setValue(coem);
     outputArea.innerText = output;
     filenameTitle.innerText = filename;
     currentTitle = filenameTitle;
