@@ -9,8 +9,9 @@ html {
 }
 
 body {
-  margin: 0;
+  margin: 0 auto;
   height: 100%;
+  max-width: 1200px;
   display: grid;
   grid-template-rows: auto 1fr auto;
   font-family: "IBM Plex Serif", serif;
@@ -30,7 +31,8 @@ button {
 */
 
 header {
-  margin: 20px 100px;
+  /* margin: 20px 100px; */
+  margin: 20px;
   display: grid;
   grid-template-columns: 20% 1fr;
   gap: 20px;
@@ -96,7 +98,8 @@ main {
   display: grid;
   grid-template-columns: 20% 30% 50%;
   grid-template-rows: auto 1fr;
-  margin: 0 100px;
+  /* margin: 0 100px; */
+  margin: 0 20px;
   gap: 20px;
 }
 
@@ -152,5 +155,6 @@ h2.filename {
 */
 
 footer {
-  margin: 20px 100px;
+  /* margin: 20px 100px; */
+  margin: 20px;
 }
