@@ -11,57 +11,65 @@
   </head>
   <body>
     <header>
-      <h1 class="title">Coem</h1>
-      <!-- adapted from the p5.js editor -->
+      <h1 class="title"><a href="/">Coem</a></h1>
       <nav class="nav">
         <ul class="nav__items">
-          <li class="nav__item">
-            <button>
-              <span class="nav__item-header">File</span>
-            </button>
-            <ul class="nav__dropdown">
-              <li class="nav__dropdown-item">
-                <button id="newBtn">New</button>
-              </li>
-              <li class="nav__dropdown-item">
-                <button>Save</button>
-              </li>
-              <li class="nav__dropdown-item">
-                <button>Examples</button>
-              </li>
-            </ul>
-          </li>
-          <li class="nav__item">
-            <button>
-              <span class="nav__item-header">Edit</span>
-            </button>
-            <ul class="nav__dropdown">
-              <li class="nav__dropdown-item">
-                <button>Find</button>
-              </li>
-              <li class="nav__dropdown-item">
-                <button>Replace</button>
-              </li>
-            </ul>
-          </li>
-          <li class="nav__item">
-            <button>
-              <span class="nav__item-header">Help</span>
-            </button>
-            <ul class="nav__dropdown">
-              <li class="nav__dropdown-item">
-                <button>Keyboard Shortcuts</button>
-              </li>
-              <li class="nav__dropdown-item">
-                <button>Reference</button>
-              </li>
-            </ul>
-          </li>
+          <li class="nav__item"><a href="/">Home</a></li>
+          <li class="nav__item"><a href="/about">About</a></li>
+          <li class="nav__item">Examples</li>
+          <li class="nav__item">Reference</li>
+          <li class="nav__item"><a href="//editor.coem-lang.org">Editor</a></li>
         </ul>
       </nav>
     </header>
 
     <main>
+
+      <!-- adapted from the p5.js editor -->
+    <nav class="editor-nav">
+      <ul class="nav__items">
+        <li class="nav__item">
+          <button>
+            <span class="nav__item-header">File</span>
+          </button>
+          <ul class="nav__dropdown">
+            <li class="nav__dropdown-item">
+              <button id="newBtn">New</button>
+            </li>
+            <li class="nav__dropdown-item">
+              <button>Save</button>
+            </li>
+            <li class="nav__dropdown-item">
+              <button>Examples</button>
+            </li>
+          </ul>
+        </li>
+        <li class="nav__item">
+          <button>
+            <span class="nav__item-header">Edit</span>
+          </button>
+          <ul class="nav__dropdown">
+            <li class="nav__dropdown-item">
+              <button>Find</button>
+            </li>
+            <li class="nav__dropdown-item">
+              <button>Replace</button>
+            </li>
+          </ul>
+        </li>
+        <li class="nav__item">
+          <button>
+            <span class="nav__item-header">Help</span>
+          </button>
+          <ul class="nav__dropdown">
+            <li class="nav__dropdown-item">
+              <button>Keyboard Shortcuts</button>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+
       <div class="toc">
         <ul class="toc__items">
           <li class="toc__item">

@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+:root {
+  --text-color: black;
+  --accent-color: blue;
+}
+
 html {
   height: 100%;
 }
@@ -15,6 +20,12 @@ body {
   display: grid;
   grid-template-rows: auto 1fr auto;
   font-family: "IBM Plex Serif", serif;
+}
+
+a {
+  color: var(--accent-color);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
 }
 
 button {
@@ -31,59 +42,89 @@ button {
 */
 
 header {
-  /* margin: 20px 100px; */
-  margin: 20px;
-  display: grid;
-  grid-template-columns: 20% 1fr;
-  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 3em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .title {
   margin: 0;
-  margin-top: -3px;
 }
 
-.nav ul {
+.title a {
+  color: var(--text-color);
+  border: none;
+}
+
+header .nav ul {
   list-style-type: none;
   padding: 0;
 }
 
-.nav__items {
+header .nav__items {
   margin: 0;
   display: flex;
-  margin-left: 25px;
 }
 
-.nav__item button {
+header .nav__item {
+  padding: 10px;
+  margin: 0;
+}
+
+header .nav__item a {
+  display: inline-block;
+}
+
+.editor-nav {
+  grid-column: 2;
+  padding-left: 28px;
+}
+
+.editor-nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.editor-nav .nav__items {
+  margin: 0;
+  display: flex;
+  /* margin-left: 25px; */
+}
+
+.editor-nav .nav__item button {
   border: 0;
   padding: 10px;
   background: none;
 }
 
-.nav__item > button:hover,
-.nav__item--open > button {
+.editor-nav .nav__item > button:hover,
+.editor-nav .nav__item--open > button {
   background-color: #eee;
 }
 
-.nav__dropdown {
+.editor-nav .nav__dropdown {
   position: absolute;
   display: none;
   z-index: 5;
   box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
 }
 
-.nav__item--open .nav__dropdown {
+.editor-nav .nav__item--open .nav__dropdown {
   display: block;
 }
 
-.nav__dropdown .nav__dropdown-item button {
+.editor-nav .nav__dropdown .nav__dropdown-item button {
   display: block;
   width: 100%;
   text-align: left;
   background-color: #eee;
 }
 
-.nav__dropdown .nav__dropdown-item button:hover {
+.editor-nav .nav__dropdown .nav__dropdown-item button:hover {
   background-color: #ccc;
 }
 
@@ -97,9 +138,8 @@ header {
 main {
   display: grid;
   grid-template-columns: 20% 30% 50%;
-  grid-template-rows: auto 1fr;
-  /* margin: 0 100px; */
-  margin: 0 20px;
+  grid-template-rows: auto auto 1fr;
+  margin: 25px 3em;
   gap: 20px;
 }
 
@@ -113,7 +153,7 @@ h2.filename {
 }
 
 .toc {
-  grid-row: 2;
+  grid-row: 3;
 }
 
 .toc__items {
@@ -155,6 +195,5 @@ h2.filename {
 */
 
 footer {
-  /* margin: 20px 100px; */
-  margin: 20px;
+  margin: 20px 100px;
 }
