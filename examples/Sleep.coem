@@ -1,10 +1,6 @@
-to sleep():
-    return dream();
+to sl?eep—when—:
+    "dreams".
 
-to dream():
-    sometimes:
-        return "dreams";
-    othertimes:
-        return "nightmares";
-
-print sleep();
+sleep—now—
+sleep—never—
+seep—always—
