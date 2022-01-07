@@ -1,7 +1,6 @@
 import {keymap, highlightSpecialChars, drawSelection, highlightActiveLine, dropCursor} from "@codemirror/view"
 import {EditorState} from "@codemirror/state"
 import {history, historyKeymap} from "@codemirror/history"
-import {foldGutter, foldKeymap} from "@codemirror/fold"
 import {indentOnInput, indentUnit} from "@codemirror/language"
 import {indentWithTab} from "@codemirror/commands"
 import {lineNumbers, highlightActiveLineGutter} from "@codemirror/gutter"
@@ -24,7 +23,6 @@ const initialState = EditorState.create({
     highlightActiveLineGutter(),
     highlightSpecialChars(),
     history(),
-    foldGutter(),
     drawSelection(),
     dropCursor(),
     EditorState.allowMultipleSelections.of(true),
@@ -39,7 +37,6 @@ const initialState = EditorState.create({
       ...defaultKeymap,
       ...searchKeymap,
       ...historyKeymap,
-      ...foldKeymap,
       ...commentKeymap,
       ...lintKeymap,
       indentWithTab
