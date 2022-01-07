@@ -2,7 +2,7 @@ import {keymap, highlightSpecialChars, drawSelection, highlightActiveLine, dropC
 import {EditorState} from "@codemirror/state"
 import {history, historyKeymap} from "@codemirror/history"
 import {foldGutter, foldKeymap} from "@codemirror/fold"
-import {indentOnInput} from "@codemirror/language"
+import {indentOnInput, indentUnit} from "@codemirror/language"
 import {indentWithTab} from "@codemirror/commands"
 import {lineNumbers, highlightActiveLineGutter} from "@codemirror/gutter"
 import {defaultKeymap} from "@codemirror/commands"
@@ -47,6 +47,7 @@ const initialState = EditorState.create({
       ...lintKeymap,
       indentWithTab
     ]),
+    indentUnit.of("    "),
     coem(),
     myTheme,
     myHighlightStyle
