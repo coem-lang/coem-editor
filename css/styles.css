@@ -203,6 +203,38 @@ h2.filename {
   font-family: "IBM Plex Mono", monospace;
 }
 
+/* POPUPS */
+
+.shortcuts {
+  display: none;
+}
+
+.shortcuts .backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.3);
+}
+
+.shortcuts .window {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 50px;
+  border-radius: 5px;
+  box-shadow: 5px 5px 20px rgba(0,0,0,0.2);
+  background-color: white;
+  width: 50%;
+  max-width: 400px;
+}
+
+.shortcuts .window dl > div {
+  margin: 1em 0;
+}
+
 /*
  ___  __   __  ___  ___  __
 |__  /  \ /  \  |  |__  |__)
