@@ -194,11 +194,6 @@ h2.filename {
   background-color: #eee;
 }
 
-.CodeMirror {
-  height: 100%;
-  font-family: "IBM Plex Serif", serif;
-}
-
 .output {
   font-family: "IBM Plex Mono", monospace;
 }
