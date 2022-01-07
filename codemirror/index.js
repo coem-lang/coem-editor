@@ -9,7 +9,6 @@ import {defaultKeymap} from "@codemirror/commands"
 import {bracketMatching} from "@codemirror/matchbrackets"
 import {closeBrackets, closeBracketsKeymap} from "@codemirror/closebrackets"
 import {searchKeymap, highlightSelectionMatches} from "@codemirror/search"
-import {autocompletion, completionKeymap} from "@codemirror/autocomplete"
 import {commentKeymap} from "@codemirror/comment"
 import {rectangularSelection} from "@codemirror/rectangular-selection"
 import {lintKeymap} from "@codemirror/lint"
@@ -32,7 +31,6 @@ const initialState = EditorState.create({
     indentOnInput(),
     bracketMatching(),
     closeBrackets(),
-    autocompletion(),
     rectangularSelection(),
     highlightActiveLine(),
     highlightSelectionMatches(),
@@ -43,7 +41,6 @@ const initialState = EditorState.create({
       ...historyKeymap,
       ...foldKeymap,
       ...commentKeymap,
-      ...completionKeymap,
       ...lintKeymap,
       indentWithTab
     ]),
