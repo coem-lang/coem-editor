@@ -1,0 +1,31 @@
+{
+  "name": "coem-editor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "codemirror/index.js",
+  "directories": {
+    "example": "examples"
+  },
+  "source": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coem-lang/coem-editor.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/coem-lang/coem-editor/issues"
+  },
+  "homepage": "https://github.com/coem-lang/coem-editor#readme",
+  "dependencies": {
+    "@codemirror/basic-setup": "^0.19.1"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5",
+    "typescript": "^4.5.4"
+  }
+}

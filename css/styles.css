@@ -34,6 +34,15 @@ button {
   font-size: 1em;
 }
 
+kbd {
+  display: inline-block;
+  margin: 0.1em;
+  padding: 0.2em 0.5em;
+  background-color: #eee;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px rgba(0,0,0,0.05);
+}
+
 /*
       ___       __   ___  __
 |__| |__   /\  |  \ |__  |__)
@@ -143,8 +152,15 @@ main {
   gap: 20px;
 }
 
-h2.filename {
+.editorHeader {
   grid-column: 2 / span 2;
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+h2.filename {
+  /* grid-column: 2 / span 2; */
   padding-left: 35px;
 }
 

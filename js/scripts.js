@@ -1,12 +1,17 @@
+import { run, parse, Environment } from './coem/coem.js';
+import { formatCoemError } from './coem/errors.js';
+
 const menuBtns = document.querySelectorAll(".nav__item > button"),
   outputArea = document.querySelector(".output"),
+  consoleArea = document.querySelector(".console"),
   filenameTitle = document.querySelector("h2 .filename-title"),
   tocItems = document.querySelector(".toc__items"),
   tocBtns = document.querySelectorAll(".toc__item button"),
-  newBtn = document.querySelector("#newBtn");
+  newBtn = document.querySelector("#newBtn"),
+  draftBtn = document.querySelector("#draftBtn");
 let editor,
   isMenuOpen = false,
-  currentTitle;
+  currentTitle = "";
 
 // MENU
 
@@ -71,8 +76,8 @@ function onTocBtnClick(e) {
 
 function load(filename) {
   Promise.all([
-    fetch("examples/" + filename + ".coem"),
-    fetch("examples/" + filename + ".output")
+    fetch("/examples/" + filename + ".coem"),
+    fetch("/examples/" + filename + ".output")
   ])
   .then(results => Promise.all(results.map(r => r.text())))
   .then(([coem, output]) => {
@@ -88,17 +93,46 @@ function load(filename) {
   .catch(err => console.log(err));
 }
 
+// DRAFT
+
+function handleError(e, source = "") {
+  if (!e) {
+    consoleArea.innerHTML = "";
+    return null;
+  }
+  console.error(e);
+  const { oneLiner, preErrorSection, errorSection, postErrorSection } = formatCoemError(e, source);
+  let errorStr = oneLiner;
+  if (errorSection) {
+    errorStr += '<br />';
+    errorStr += `${preErrorSection}<span class="error">${errorSection}</span>${postErrorSection}`;
+  }
+  consoleArea.innerHTML = errorStr;
+}
+
+function handleOutput(txt) {
+  output += txt + '\n';
+  console.log(txt);
+  outputArea.innerHTML = output;
+}
+
+function draft() {
+  // https://github.com/danman113/YALI.js/blob/master/browser.js
+  const source = editor.getDoc().getValue();
+  console.log(source);
+  const browserEnv = new Environment();
+  try {
+    run(source, browserEnv, handleOutput);
+    handleError(null);
+  } catch (e) {
+    handleError(e, source);
+  }
+}
+
 // MAIN
 
 document.addEventListener("DOMContentLoaded", () => {
-  // set up editor
-  editor = CodeMirror(document.querySelector(".editor"), {
-    lineNumbers: true,
-    styleActiveLine: true,
-    styleSelectedText: true
-  });
-
-  load("Looking");
+  // load("Looking");
 
   menuBtns.forEach(button => {
     button.addEventListener("click", onMenuBtnClick);
@@ -115,4 +149,6 @@ document.addEventListener("DOMContentLoaded", () => {
   tocBtns.forEach(btn => {
     btn.addEventListener("click", onTocBtnClick);
   });
+
+  draftBtn.addEventListener("click", draft);
 });
