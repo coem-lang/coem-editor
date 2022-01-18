@@ -1,5 +1,6 @@
 import { run, parse, Environment } from './coem/coem.js';
 import { formatCoemError } from './coem/errors.js';
+import { view } from './codemirror/index.js';
 
 const menuBtns = document.querySelectorAll(".nav__item > button"),
   outputArea = document.querySelector(".output"),
@@ -48,7 +49,9 @@ function onNewBtnClick(e) {
 }
 
 function clear() {
-  editor.getDoc().setValue("");
+  view.dispatch({
+    changes: {from: 0, to: view.state.doc.length, insert: ""}
+  });
   outputArea.innerHTML = "";
   for (let btn of tocBtns) {
     btn.parentElement.classList.remove("current");
@@ -118,7 +121,7 @@ function handleOutput(txt) {
 
 function draft() {
   // https://github.com/danman113/YALI.js/blob/master/browser.js
-  const source = editor.getDoc().getValue();
+  const source = view.state.doc.toString();
   console.log(source);
   const browserEnv = new Environment();
   try {
@@ -141,11 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   newBtn.addEventListener("click", onNewBtnClick);
-  // newBtn.addEventListener("click", e => {
-  //   e.preventDefault();
-  //   console.log(e);
-  // });
-
+  
   tocBtns.forEach(btn => {
     btn.addEventListener("click", onTocBtnClick);
   });
