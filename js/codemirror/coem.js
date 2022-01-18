@@ -92,13 +92,14 @@ const parser = LRParser.deserialize({
   ],
   skippedNodes: [0,1],
   repeatNodeCount: 5,
-  tokenData: "$w~RbXY!Z[]!Zpq!Zvw!uxy!zyz!z|}#f!O!P#k![!]#p!c!}!z!}#O!z#O#P!l#P#Q!z#T#o!z#p#q!z$Ih$Ii#u$Ip$Iq#z$It$Iu$i~!`S!W~XY!Z[]!Zpq!Z#O#P!l~!oQYZ!Z]^!Z~!zOk~~#PV!]~xy!zyz!z!c!}!z!}#O!z#P#Q!z#T#o!z#p#q!z~#kOe~~#pOs~~#uOr~~#zOX~~#}TO$Iq#z$Iq$Ir$^$Ir$It#z$It$Iu$c$Iu~#z~$cOT~~$fPO~#z~$nRP~OY$iZ]$i^~$i",
+  tokenData: "%Z~ReXY!d[]!dpq!dvw#Oxy#Tyz#Tz{#T{|#T|}#x!O!P#}![!]$S!a!b#T!c!}#T!}#O#T#O#P!u#P#Q#T#T#o#T#p#q#T$Ih$Ii$X$Ip$Iq$^$It$Iu${~!iS!W~XY!d[]!dpq!d#O#P!u~!xQYZ!d]^!d~#TOk~~#YY!]~xy#Tyz#Tz{#T{|#T!a!b#T!c!}#T!}#O#T#P#Q#T#T#o#T#p#q#T~#}Oe~~$SOs~~$XOr~~$^OX~~$aTO$Iq$^$Iq$Ir$p$Ir$It$^$It$Iu$u$Iu~$^~$uOT~~$xPO~$^~%QRP~OY${Z]${^~${",
   tokenizers: [indentation, 0, newlines],
   topRules: {"Script":[0,2]},
   specialized: [{term: 59, get: value => spec_identifier[value] || -1}],
   tokenPrec: 0
 });
 
+// https://github.com/codemirror/lang-python/blob/main/src/python.ts
 function indentBody(context, node) {
     let base = context.lineIndent(node.from);
     let line = context.lineAt(context.pos, -1), to = line.from + line.text.length;
@@ -116,6 +117,8 @@ function indentBody(context, node) {
         return null;
     return base + context.unit;
 }
+/// A language provider based on the Coem parser,
+/// extended with highlighting and indentation information.
 const coemLanguage = LRLanguage.define({
     parser: parser.configure({
         props: [
@@ -154,19 +157,21 @@ const coemLanguage = LRLanguage.define({
                 "FunctionDefinition/VariableName": tags.function(tags.definition(tags.variableName)),
                 Comment: tags.lineComment,
                 String: tags.string,
-                "— —": tags.bracket,
+                "—": tags.bracket,
                 ",": tags.separator
             })
-        ]
+        ],
+        strict: false
     }),
     languageData: {
-        closeBrackets: {
-            brackets: ["(", "[", '"', "“", "—"]
-        },
+        // closeBrackets: {
+        //   brackets: ["(", "[", '"', "“", "—"]
+        // },
         commentTokens: { line: "†" },
         indentOnInput: /^\s*([\}\]\)]|else:|else if:)$/
     }
 });
+/// Coem language support.
 function coem() {
     return new LanguageSupport(coemLanguage);
 }

@@ -1,7 +1,7 @@
 import { HighlightStyle, tags } from '@codemirror/highlight';
 
 export const myHighlightStyle = HighlightStyle.define([
-  {tag: tags.keyword,
+  {tag: [tags.keyword, tags.bool],
     fontStyle: "normal"},
   {tag: [tags.string, tags.deleted],
     fontFamily: "IBM Plex Sans"},

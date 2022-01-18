@@ -27,8 +27,13 @@ const initialState = EditorState.create({
     dropCursor(),
     EditorState.allowMultipleSelections.of(true),
     indentOnInput(),
-    bracketMatching(),
-    closeBrackets(),
+    bracketMatching({
+      brackets: "——()[]"
+    }),
+    closeBrackets({
+      brackets: ["“"],
+      before: "”"
+    }),
     rectangularSelection(),
     highlightActiveLine(),
     highlightSelectionMatches(),
@@ -51,4 +56,6 @@ const initialState = EditorState.create({
 const view = new EditorView({
   parent: document.getElementById('editor'),
   state: initialState
-})
+});
+
+export { view };
