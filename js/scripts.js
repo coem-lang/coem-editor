@@ -1,6 +1,6 @@
 import { run, parse, Environment } from './coem/coem.js';
 import { formatCoemError } from './coem/errors.js';
-import { view } from './codemirror/index.js';
+import { view } from './codemirror/setup.js';
 
 const menuBtns = document.querySelectorAll(".nav__item > button"),
   outputArea = document.querySelector(".output"),
