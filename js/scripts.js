@@ -12,7 +12,7 @@ const menuBtns = document.querySelectorAll(".nav__item > button"),
   draftBtn = document.querySelector("#draftBtn");
 let editor,
   isMenuOpen = false,
-  currentTitle = "",
+  currentTitle = "Untitled",
   output = "";
 
 // MENU
@@ -140,17 +140,17 @@ function draft() {
 document.addEventListener("DOMContentLoaded", () => {
   // load("Looking");
 
-  menuBtns.forEach(button => {
-    button.addEventListener("click", onMenuBtnClick);
-    button.addEventListener("mouseover", onMenuBtnMouseover);
-    button.addEventListener("blur", onMenuBtnBlur);
-  });
+  // menuBtns.forEach(button => {
+  //   button.addEventListener("click", onMenuBtnClick);
+  //   button.addEventListener("mouseover", onMenuBtnMouseover);
+  //   button.addEventListener("blur", onMenuBtnBlur);
+  // });
 
-  newBtn.addEventListener("click", onNewBtnClick);
+  // newBtn.addEventListener("click", onNewBtnClick);
   
-  tocBtns.forEach(btn => {
-    btn.addEventListener("click", onTocBtnClick);
-  });
+  // tocBtns.forEach(btn => {
+  //   btn.addEventListener("click", onTocBtnClick);
+  // });
 
   draftBtn.addEventListener("click", draft);
 });
