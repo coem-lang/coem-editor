@@ -75,7 +75,7 @@ const tokenMap = {
   '\t': noop,
   '\r': noop,
   '\n': tokenizer => {
-    tokenizer.addToken(tokenEnum.newline);
+    tokenizer.addToken(tokenEnum.NEWLINE);
     tokenizer.newline();
   },
   '“': tokenizer => {
@@ -228,7 +228,4 @@ class Token {
   }
 }
 
-module.exports = {
-  Tokenizer,
-  Token
-};
+module.exports = Tokenizer;

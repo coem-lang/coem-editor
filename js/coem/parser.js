@@ -1,4 +1,4 @@
-const { Tokenizer, Token } = require('./tokenizer');
+const tokenizer = require('./tokenizer');
 const {
   Binary,
   Unary,
@@ -15,7 +15,7 @@ const {
   Condition
 } = require('./types');
 const { parseError: ParseError } = require('./errors');
-const token = Tokenizer.tokenEnum;
+const token = tokenizer.tokenEnum;
 
 class Parser {
   constructor(tokens) {
@@ -28,7 +28,7 @@ class Parser {
     let statements = []
     while (!this.isAtEnd) {
       while (this.check(token.NEWLINE)) {
-        consume(token.NEWLINE, "Expect newline between statements.");
+        this.consume(token.NEWLINE, "Expect newline between statements.");
       }
       statements.push(this.declaration());
     }
@@ -54,18 +54,19 @@ class Parser {
 
   function() {
     const name = this.consume(token.IDENTIFIER, `Expect function name.`);
-
-    let params = [];
     this.consume(token.EMDASH, `Expect '—' after function name.`);
+    let params = [];
     if (!this.check(token.EMDASH)) {
       do {
         if (params.size() >= 255) {
           throw ParseError("Can't have more than 255 arguments.", this.peek());
         }
+
         params.push(this.consume(token.IDENTIFIER, 'Expect identifier name.'));
       } while (this.match(token.COMMA));
     }
     this.consume(token.EMDASH, `Expect '—' after arguments.`);
+
     this.consume(token.COLON, `Expect ':' before function body.`);
     const body = this.block();
     return new CoemFunction(name, params, body);
@@ -79,7 +80,12 @@ class Parser {
     }
 
     while (!this.check(token.DOT) && !this.isAtEnd) {
-      statements.push(this.declaration());
+      while (this.check(token.NEWLINE)) {
+        this.consume(token.NEWLINE, "Expect newline between statements.");
+      }
+      if (!this.check(token.DOT) && !this.isAtEnd) {
+        statements.push(this.declaration());
+      }
     }
 
     this.consume(token.DOT, "Expect '.' after block.");
@@ -122,36 +128,17 @@ class Parser {
   equality() {
     // return this.matchBinary('comparison', Binary, token.BANG_EQUAL, token.EQUAL_EQUAL)
     // const expr = this.comparison();
-    const expr = this.unary();
+    let expr = this.unary();
 
     // while (this.match(token.BANG_EQUAL, token.EQUAL_EQUAL, token.IS, token.AM, token.ARE)) {
     while (this.match(token.IS, token.AM, token.ARE)) {
       const operator = this.previous();
-      const right = this.comparison();
-      const expr = new Binary(expr, operator, right);
+      const right = this.unary();
+      expr = new Binary(expr, operator, right);
     }
 
     return expr;
   }
-
-  // comparison() {
-  //   return this.matchBinary(
-  //     'addition',
-  //     Binary,
-  //     token.GREATER,
-  //     token.GREATER_EQUAL,
-  //     token.LESS,
-  //     token.LESS_EQUAL
-  //   );
-  // }
-
-  // addition() {
-  //   return this.matchBinary('multiplication', Binary, token.MINUS, token.PLUS);
-  // }
-
-  // multiplication() {
-  //   return this.matchBinary('unary', Binary, token.SLASH, token.STAR);
-  // }
 
   unary() {
     if (this.match(token.NOT)) {
@@ -199,7 +186,7 @@ class Parser {
 
     if (!this.check(token.EMDASH)) {
       do {
-        if (args.size() >= 255) {
+        if (args.length >= 255) {
           throw ParseError("Can't have more than 255 arguments.", this.peek());
         }
         this.isParamListStarted = true;
@@ -208,7 +195,7 @@ class Parser {
       } while (this.match(token.COMMA));
     }
 
-    const dash = this.consume(token.EMDASH, "Expect ')' after arguments.");
+    const dash = this.consume(token.EMDASH, "Expect '—' after arguments.");
 
     return new Call(callee, dash, args);
   }
@@ -226,8 +213,8 @@ class Parser {
     this.consume(token.EMDASH, `Expect '—' after 'if'.`);
     this.isParamListStarted = true;
     const cond = this.expression();
-    this.isParamListStarted = false;
     this.consume(token.EMDASH, `Expect '—' after if condition.`);
+    this.isParamListStarted = false;
 
     const thenBranch = this.statement();
     let elseBranch = null;
@@ -252,8 +239,8 @@ class Parser {
     this.consume(token.EMDASH, `Expect '—' after 'while'.`);
     this.isParamListStarted = true;
     const cond = this.expression();
-    this.isParamListStarted = false;
     this.consume(token.EMDASH, `Expect '—' after condition.`);
+    this.isParamListStarted = false;
     const body = this.statement();
 
     return new While(cond, body);
@@ -267,14 +254,14 @@ class Parser {
     let wrapped = expr;
     if (expr instanceof Call) {
       const callee = expr.callee;
-      if (!callee.name.lexeme.equals("print")) {
+      if (!callee.name === "print") {
         wrapped = printExpression(expr);
       }
     } else {
       wrapped = printExpression(expr);
     }
 
-    return new ExpressionStatement(expr);
+    return new ExpressionStatement(wrapped);
   }
 
   printExpression(expr) {
