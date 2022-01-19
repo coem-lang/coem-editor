@@ -12,7 +12,8 @@ const menuBtns = document.querySelectorAll(".nav__item > button"),
   draftBtn = document.querySelector("#draftBtn");
 let editor,
   isMenuOpen = false,
-  currentTitle = "";
+  currentTitle = "",
+  output = "";
 
 // MENU
 
@@ -61,9 +62,9 @@ function clear() {
 function createNewFile() {
   clear();
   let tocItem = document.querySelector(".toc__item").cloneNode(true);
-  filenameTitle.innerText = "Untitled";
+  filenameTitle.innerHTML = "Untitled";
   currentTitle = filenameTitle;
-  tocItem.querySelector(".filename-title").innerText = "Untitled";
+  tocItem.querySelector(".filename-title").innerHTML = "Untitled";
   tocItems.appendChild(tocItem);
 }
 
@@ -85,8 +86,8 @@ function load(filename) {
   .then(results => Promise.all(results.map(r => r.text())))
   .then(([coem, output]) => {
     editor.getDoc().setValue(coem);
-    outputArea.innerText = output;
-    filenameTitle.innerText = filename;
+    outputArea.innerHTML = output;
+    filenameTitle.innerHTML = filename;
     currentTitle = filenameTitle;
     for (let btn of tocBtns) {
       btn.parentElement.classList.remove("current");
@@ -116,6 +117,7 @@ function handleError(e, source = "") {
 function handleOutput(txt) {
   output += txt + '\n';
   console.log(txt);
+  console.log(output);
   outputArea.innerHTML = output;
 }
 
@@ -124,6 +126,7 @@ function draft() {
   const source = view.state.doc.toString();
   console.log(source);
   const browserEnv = new Environment();
+  output = "";
   try {
     run(source, browserEnv, handleOutput);
     handleError(null);
