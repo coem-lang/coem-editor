@@ -117,7 +117,6 @@ function handleError(e, source = "") {
 function handleOutput(txt) {
   output += txt + '\n';
   console.log(txt);
-  console.log(output);
   outputArea.innerHTML = output;
 }
 

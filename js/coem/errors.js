@@ -71,7 +71,7 @@ const formatCoemError = (e, code) => {
     };
   } else {
     return {
-      oneLiner: `Unexpected javascript Error: ${e}`
+      oneLiner: `Unexpected JavaScript. Error: ${e}`
     };
   }
 }
