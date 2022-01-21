@@ -1,6 +1,5 @@
-import {keymap, highlightSpecialChars, drawSelection, highlightActiveLine, dropCursor} from "@codemirror/view"
+import {EditorView, keymap, highlightSpecialChars, drawSelection, highlightActiveLine, dropCursor} from "@codemirror/view"
 import {EditorState} from "@codemirror/state"
-import {EditorView} from "@codemirror/view"
 import {history, historyKeymap} from "@codemirror/history"
 import {indentOnInput, indentUnit} from "@codemirror/language"
 import {indentWithTab} from "@codemirror/commands"
