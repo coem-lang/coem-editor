@@ -4,8 +4,16 @@ The interactive web editor for the Coem language.
 
 ## Setup
 
+Start development server (with hot reloading):
+
 ```
 npm start
+```
+
+Build to /docs:
+
+```
+npm run build
 ```
 
 ## References
