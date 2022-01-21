@@ -1,5 +1,6 @@
 import {keymap, highlightSpecialChars, drawSelection, highlightActiveLine, dropCursor} from "@codemirror/view"
 import {EditorState} from "@codemirror/state"
+import {EditorView} from "@codemirror/view"
 import {history, historyKeymap} from "@codemirror/history"
 import {indentOnInput, indentUnit} from "@codemirror/language"
 import {indentWithTab} from "@codemirror/commands"
@@ -11,7 +12,6 @@ import {searchKeymap, highlightSelectionMatches} from "@codemirror/search"
 import {commentKeymap} from "@codemirror/comment"
 import {rectangularSelection} from "@codemirror/rectangular-selection"
 import {lintKeymap} from "@codemirror/lint"
-import { EditorState, EditorView } from '@codemirror/basic-setup';
 import { coem } from './coem';
 import { myTheme } from './theme';
 import { myHighlightStyle } from './highlight';
