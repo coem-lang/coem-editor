@@ -24,5 +24,8 @@ export const myTheme = EditorView.baseTheme({
   },
   ".cm-gutterElement": {
     padding: "2px 20px 0 5px !important"
+  },
+  "&.cm-focused .cm-matchingBracket, & .cm-matchingBracket": {
+    backgroundColor: "#00000011 !important"
   }
 });

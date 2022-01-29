@@ -5,7 +5,8 @@ import {indentOnInput, indentUnit} from "@codemirror/language"
 import {indentWithTab} from "@codemirror/commands"
 import {lineNumbers, highlightActiveLineGutter} from "@codemirror/gutter"
 import {defaultKeymap} from "@codemirror/commands"
-import {bracketMatching} from "@codemirror/matchbrackets"
+// import {bracketMatching} from "@codemirror/matchbrackets"
+import {bracketMatching} from "./matchbrackets"
 // import {closeBrackets, closeBracketsKeymap} from "@codemirror/closebrackets"
 import {closeBrackets, closeBracketsKeymap} from "./closebrackets"
 import {searchKeymap, highlightSelectionMatches} from "@codemirror/search"
@@ -28,7 +29,7 @@ const initialState = EditorState.create({
     EditorState.allowMultipleSelections.of(true),
     indentOnInput(),
     bracketMatching({
-      brackets: "——()[]"
+      brackets: "“”——()[]"
     }),
     closeBrackets(),
     rectangularSelection(),

@@ -166,9 +166,6 @@ const coemLanguage = LRLanguage.define({
         strict: false
     }),
     languageData: {
-        // closeBrackets: {
-        //   brackets: ["(", "[", '"', "“", "—"]
-        // },
         commentTokens: { line: "†" },
         indentOnInput: /^\s*([\}\]\)]|else:|else if:)$/
     }
