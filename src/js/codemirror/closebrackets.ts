@@ -202,14 +202,11 @@ function handleSame(state: EditorState, token: string) {
               range: EditorSelection.range(range.anchor + token.length, range.head + token.length)}
     let pos = range.head, next = nextChar(state.doc, pos)
     if (next == token) {
-      console.log("next == token")
       if (nodeStart(state, pos)) {
-        console.log("nodeStart(state, pos))")
         return {changes: {insert: token + token, from: pos},
                 effects: closeBracketEffect.of(pos + token.length),
                 range: EditorSelection.cursor(pos + token.length)}
       } else if (closedBracketAt(state, pos)) {
-        console.log("closedBracketAt(state, pos))")
         return {range: EditorSelection.cursor(pos + token.length),
                 effects: skipBracketEffect.of(pos)}
       }
@@ -217,7 +214,6 @@ function handleSame(state: EditorState, token: string) {
       let prev = state.sliceDoc(pos - 1, pos)
       // if (prev != token && state.charCategorizer(pos)(prev) != CharCategory.Word && !probablyInString(state, pos, token)) {
       if (prev != token && !probablyInString(state, pos, token)) {
-        console.log("word if")
         return {changes: {insert: token + token, from: pos},
                 effects: closeBracketEffect.of(pos + token.length),
                 range: EditorSelection.cursor(pos + token.length)}
