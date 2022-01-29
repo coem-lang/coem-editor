@@ -6,7 +6,8 @@ import {indentWithTab} from "@codemirror/commands"
 import {lineNumbers, highlightActiveLineGutter} from "@codemirror/gutter"
 import {defaultKeymap} from "@codemirror/commands"
 import {bracketMatching} from "@codemirror/matchbrackets"
-import {closeBrackets, closeBracketsKeymap} from "@codemirror/closebrackets"
+// import {closeBrackets, closeBracketsKeymap} from "@codemirror/closebrackets"
+import {closeBrackets, closeBracketsKeymap} from "./closebrackets"
 import {searchKeymap, highlightSelectionMatches} from "@codemirror/search"
 import {commentKeymap} from "@codemirror/comment"
 import {rectangularSelection} from "@codemirror/rectangular-selection"
@@ -29,10 +30,7 @@ const initialState = EditorState.create({
     bracketMatching({
       brackets: "——()[]"
     }),
-    closeBrackets({
-      brackets: ["“"],
-      before: "”"
-    }),
+    closeBrackets(),
     rectangularSelection(),
     highlightActiveLine(),
     highlightSelectionMatches(),
