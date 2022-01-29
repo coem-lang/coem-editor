@@ -8,7 +8,7 @@
   "source": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "parcel src/index.html",
+    "start": "parcel src/index.html --dist-dir docs",
     "build": "parcel build src/index.html --dist-dir docs --public-url ./"
   },
   "repository": {
