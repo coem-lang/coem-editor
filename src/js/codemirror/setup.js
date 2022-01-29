@@ -11,7 +11,7 @@ import {searchKeymap, highlightSelectionMatches} from "@codemirror/search"
 import {commentKeymap} from "@codemirror/comment"
 import {rectangularSelection} from "@codemirror/rectangular-selection"
 import {lintKeymap} from "@codemirror/lint"
-import { coem } from './coem';
+import { coem } from './lang-coem';
 import { myTheme } from './theme';
 import { myHighlightStyle } from './highlight';
 
