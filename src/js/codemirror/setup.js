@@ -1,4 +1,4 @@
-import {EditorView, keymap, highlightSpecialChars, drawSelection, highlightActiveLine, dropCursor} from "@codemirror/view"
+import {EditorView, keymap, highlightSpecialChars, drawSelection, highlightActiveLine, dropCursor, ViewPlugin} from "@codemirror/view"
 import {EditorState} from "@codemirror/state"
 import {history, historyKeymap} from "@codemirror/history"
 import {indentOnInput, indentUnit} from "@codemirror/language"
@@ -18,7 +18,16 @@ import { myTheme } from './theme';
 import { myHighlightStyle } from './highlight';
 
 const initialState = EditorState.create({
-  doc: '',
+  doc: '† this is a reminder\n\
+\n\
+to breathing——:\n\
+    † in and out, and thus to\n\
+    know—myself—\n\
+    & nothing.\n\
+\n\
+let me|myself|I be “present”\n\
+while—I am “present”—:\n\
+    let me be breathing——.',
   extensions: [
     lineNumbers(),
     highlightActiveLineGutter(),
@@ -55,5 +64,17 @@ const view = new EditorView({
   parent: document.getElementById('editor'),
   state: initialState
 });
+
+// view.dispatch({
+//   changes: {from: 0, insert: "#!/usr/bin/env node\n"}
+// });
+
+// let text = view.state.doc.toString(), pos = 0;
+// let changes = [];
+// for (let next; (next = text.indexOf("amongus", pos)) > -1;) {
+//   changes.push({from: next, to: next + 1, insert: "AMONGUS"});
+//   pos = next + 1;
+// }
+// view.dispatch({changes});
 
 export { view };
