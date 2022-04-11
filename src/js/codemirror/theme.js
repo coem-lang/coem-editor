@@ -20,7 +20,7 @@ export const myTheme = EditorView.baseTheme({
     borderRight: "0 !important",
     fontSize: "12px",
     fontFamily: "Georgia", // Georgia for oldstyle figures, until implemented in IBM Plex https://github.com/IBM/plex/issues/418
-    lineHeight: "24px"
+    lineHeight: "26px"
   },
   ".cm-gutterElement": {
     padding: "2px 20px 0 5px !important"
