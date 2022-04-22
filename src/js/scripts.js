@@ -7,7 +7,7 @@ const menuBtns = document.querySelectorAll(".nav__item > button"),
   tocItems = document.querySelector(".toc__items"),
   tocBtns = document.querySelectorAll(".toc__item button"),
   newBtn = document.querySelector("#newBtn"),
-  draftBtn = document.querySelector("#draftBtn");
+  reflectBtn = document.querySelector("#reflectBtn");
 let editor,
   isMenuOpen = false,
   currentTitle = "Untitled",
@@ -95,7 +95,7 @@ function load(filename) {
   .catch(err => console.log(err));
 }
 
-// DRAFT
+// REFLECT
 
 function handleError(e, source = "") {
   if (!e) {
@@ -118,7 +118,7 @@ function handleOutput(txt) {
   outputArea.innerHTML = output;
 }
 
-function draft() {
+function reflect() {
   // https://github.com/danman113/YALI.js/blob/master/browser.js
   const source = view.state.doc.toString();
   console.log(source);
@@ -149,5 +149,5 @@ document.addEventListener("DOMContentLoaded", () => {
   //   btn.addEventListener("click", onTocBtnClick);
   // });
 
-  draftBtn.addEventListener("click", draft);
+  reflectBtn.addEventListener("click", reflect);
 });
