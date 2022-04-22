@@ -16,6 +16,8 @@ import {lintKeymap} from "@codemirror/lint"
 import { coem } from './lang-coem';
 import { myTheme } from './theme';
 import { myHighlightStyle } from './highlight';
+import { curlyQuotes, replaceQuoteKeymap } from './curlyquotes';
+import { emDash, replaceHyphenKeymap } from './emdash';
 
 const initialState = EditorState.create({
   doc: '† this is a reminder\n\
@@ -41,6 +43,8 @@ while—I am “present”—:\n\
       brackets: "“”——()[]"
     }),
     closeBrackets(),
+    curlyQuotes(),
+    emDash(),
     rectangularSelection(),
     highlightActiveLine(),
     highlightSelectionMatches(),
@@ -51,7 +55,9 @@ while—I am “present”—:\n\
       ...historyKeymap,
       ...commentKeymap,
       ...lintKeymap,
-      indentWithTab
+      indentWithTab,
+      ...replaceHyphenKeymap,
+      ...replaceQuoteKeymap
     ]),
     indentUnit.of("    "),
     coem(),
@@ -64,17 +70,5 @@ const view = new EditorView({
   parent: document.getElementById('editor'),
   state: initialState
 });
-
-// view.dispatch({
-//   changes: {from: 0, insert: "#!/usr/bin/env node\n"}
-// });
-
-// let text = view.state.doc.toString(), pos = 0;
-// let changes = [];
-// for (let next; (next = text.indexOf("amongus", pos)) > -1;) {
-//   changes.push({from: next, to: next + 1, insert: "AMONGUS"});
-//   pos = next + 1;
-// }
-// view.dispatch({changes});
 
 export { view };

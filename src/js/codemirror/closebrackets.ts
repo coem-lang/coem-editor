@@ -71,8 +71,11 @@ export function closeBrackets(): Extension {
 const definedClosing = "()[]“”——"
 
 function closing(ch: number) {
-  for (let i = 0; i < definedClosing.length; i += 2)
-    if (definedClosing.charCodeAt(i) == ch) return definedClosing.charAt(i + 1)
+  for (let i = 0; i < definedClosing.length; i += 2) {
+    if (definedClosing.charCodeAt(i) == ch) {
+      return definedClosing.charAt(i + 1)
+    }
+  }
   return fromCodePoint(ch < 128 ? ch : ch + 1)
 }
 
@@ -138,8 +141,9 @@ export function insertBracket(state: EditorState, bracket: string): Transaction 
         : handleOpen(state, tok, closed, conf.before || defaults.before)
       // return handleOpen(state, tok, closed, conf.before || defaults.before)
     }
-    if (bracket == closed && closedBracketAt(state, state.selection.main.from))
+    if (bracket == closed && closedBracketAt(state, state.selection.main.from)) {
       return handleClose(state, tok, closed)
+    }
   }
   return null
 }
@@ -164,15 +168,21 @@ function prevChar(doc: Text, pos: number) {
 
 function handleOpen(state: EditorState, open: string, close: string, closeBefore: string) {
   let dont = null, changes = state.changeByRange(range => {
-    if (!range.empty)
+
+    // a selection exists, put brackets around it
+    if (!range.empty) {
       return {changes: [{insert: open, from: range.from}, {insert: close, from: range.to}],
               effects: closeBracketEffect.of(range.to + open.length),
               range: EditorSelection.range(range.anchor + open.length, range.head + open.length)}
+    }
+
     let next = nextChar(state.doc, range.head)
-    if (!next || /\s/.test(next) || closeBefore.indexOf(next) > -1)
+    if (!next || /\s/.test(next) || closeBefore.indexOf(next) > -1) {
       return {changes: {insert: open + close, from: range.head},
               effects: closeBracketEffect.of(range.head + open.length),
               range: EditorSelection.cursor(range.head + open.length)}
+    }
+
     return {range: dont = range}
   })
   return dont ? null : state.update(changes, {
