@@ -24,7 +24,7 @@ export interface CloseBracketConfig {
 const defaults: Required<CloseBracketConfig> = {
   // brackets: ["(", "[", "{", "'", '"'],
   brackets: ["(", "[", "“", "—"],
-  before: ")]}'\":;>"
+  before: "—)]:."
 }
 
 const closeBracketEffect = StateEffect.define<number>({

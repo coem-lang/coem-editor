@@ -14,6 +14,8 @@ export function curlyQuotes(): Extension {
   return [inputHandler]
 }
 
+const before = "—)]:."
+
 /// Input handler to check for straight quotes to
 /// replace with curly quotes.
 const inputHandler = EditorView.inputHandler.of((view, from, to, insert) => {
@@ -47,9 +49,14 @@ export const triggerCloseBrackets: StateCommand = ({state, dispatch}) => {
     return {range: dont = range}
   })
   // set character to opening or closing quote depending on
-  // if there is no next character or if next character is
-  // whitespace
-  let char = (!next || /\s/.test(next)) ? "“" : "”";
+  // if there is no next character / if next character is
+  // whitespace / if next character is in the before list
+  let char;
+  if (!next || /\s/.test(next) || before.indexOf(next) > -1) {
+    char = "“"
+  } else {
+    char = "”"
+  }
 
   // dispatch transaction
   // insert opening or closing bracket depending on
