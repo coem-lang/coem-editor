@@ -1,5 +1,5 @@
 import {EditorView, keymap, highlightSpecialChars, drawSelection, highlightActiveLine, dropCursor, ViewPlugin} from "@codemirror/view"
-import {EditorState} from "@codemirror/state"
+import {EditorSelection, EditorState} from "@codemirror/state"
 import {history, historyKeymap} from "@codemirror/history"
 import {indentOnInput, indentUnit} from "@codemirror/language"
 import {indentWithTab} from "@codemirror/commands"
@@ -16,8 +16,8 @@ import {lintKeymap} from "@codemirror/lint"
 import { coem } from './lang-coem';
 import { myTheme } from './theme';
 import { myHighlightStyle } from './highlight';
-import { curlyQuotes, replaceQuoteKeymap } from './curlyquotes';
-import { emDash, replaceHyphenKeymap } from './emdash';
+import { curlyQuotes, replaceQuoteKeymap, triggerCloseQuotes } from './curlyquotes';
+import { emDash, replaceHyphenKeymap, triggerCloseBrackets } from './emdash';
 
 const initialState = EditorState.create({
   doc: '† this is a reminder\n\
@@ -70,5 +70,27 @@ const view = new EditorView({
   parent: document.getElementById('editor'),
   state: initialState
 });
+
+document.querySelector("#clearBtn").addEventListener("click", e => {
+  view.dispatch({ changes: { from: 0, to: view.state.doc.length, insert: "" } });
+  view.focus();
+});
+document.querySelector("#commentBtn").addEventListener("click", () => insert("† "));
+document.querySelector("#dashBtn").addEventListener("click", () => insert("—"));
+document.querySelector("#colonBtn").addEventListener("click", () => insert(":"));
+document.querySelector("#ampersandBtn").addEventListener("click", () => insert("&"));
+document.querySelector("#openQuoteBtn").addEventListener("click", () => insert("“"));
+document.querySelector("#closeQuoteBtn").addEventListener("click", () => insert("”"));
+document.querySelector("#pipeBtn").addEventListener("click", () => insert("|"));
+document.querySelector("#openParenBtn").addEventListener("click", () => insert("("));
+document.querySelector("#closeParenBtn").addEventListener("click", () => insert(")"));
+document.querySelector("#questionBtn").addEventListener("click", () => insert("?"));
+document.querySelector("#asteriskBtn").addEventListener("click", () => insert("*"));
+document.querySelector("#plusBtn").addEventListener("click", () => insert("+"));
+
+function insert(str) {
+  view.dispatch(view.state.replaceSelection(str));
+  view.focus();
+}
 
 export { view };

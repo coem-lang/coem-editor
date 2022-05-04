@@ -58,7 +58,7 @@ header {
   /* margin: 3em; */
   /* margin-left: 2em; */
   /* margin-right: 2em; */
-  padding: 3em;
+  padding: 1em 3em;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -215,14 +215,23 @@ main {
 
 .editorHeader {
   /* grid-column: 2 / span 2; */
+  /* display: flex; */
+  /* align-items: center; */
+  /* gap: 1em; */
+  margin: 1em 0;
+}
+
+.editorHeader > div {
   display: flex;
-  align-items: center;
   gap: 1em;
+  align-items: center;
+  margin: 1em;
 }
 
 h2.filename {
   /* grid-column: 2 / span 2; */
   /* padding-left: 35px; */
+  margin: 0;
 }
 
 .filename-ext {
@@ -254,6 +263,22 @@ h2.filename {
 .current button {
   background-color: #eee;
 } */
+
+.formatting {
+  font-size: 0.8em;
+}
+
+.commentBtns button {
+  font-style: italic;
+}
+
+.stringBtns button {
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+.regexBtns button {
+  font-family: "IBM Plex Mono", monospace;
+}
 
 .code {
   /* display: grid; */

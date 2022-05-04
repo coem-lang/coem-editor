@@ -39,7 +39,7 @@ const inputHandler = EditorView.inputHandler.of((view, from, to, insert) => {
 
 /// Command that triggers bracket-closing behavior after
 /// replacing straight quote with curly quote.
-export const triggerCloseBrackets: StateCommand = ({state, dispatch}) => {
+export const triggerCloseQuotes: StateCommand = ({state, dispatch}) => {
   if (state.readOnly) return false
 
   // check for next character
@@ -69,7 +69,7 @@ export const triggerCloseBrackets: StateCommand = ({state, dispatch}) => {
 /// A keymap to trigger bracket-closing behavior after
 /// replacing straight quote with curly quote.
 export const replaceQuoteKeymap: readonly KeyBinding[] = [
-  {key: '"', run: triggerCloseBrackets}
+  {key: '"', run: triggerCloseQuotes}
 ]
 
 /// Implements the extension's behavior on replacing straight
