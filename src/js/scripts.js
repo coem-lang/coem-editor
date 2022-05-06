@@ -115,7 +115,7 @@ function setDoc(str) {
 // MAIN
 
 document.addEventListener("DOMContentLoaded", () => {
-  load("Reminder");
+  load("reminder");
 
   // nav
   navToggle.addEventListener("click", e => {
