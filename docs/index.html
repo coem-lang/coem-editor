@@ -1,1 +1,173 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Coem | Editor</title><meta name="description" content="Web editor for Coem, a poetic programing language."><link href="//fonts.cdnfonts.com/css/ibm-plex-serif-2" rel="stylesheet"><link href="//fonts.cdnfonts.com/css/ibm-plex-mono-3" rel="stylesheet"><link href="//fonts.cdnfonts.com/css/ibm-plex-sans-condensed-3" rel="stylesheet"><link rel="stylesheet" href="index.7eb1cff9.css"><link rel="icon" href="logo-bg-32.2270dd47.png" sizes="32x32"><link rel="icon" href="logo-bg-57.bc657bae.png" sizes="57x57"><link rel="icon" href="logo-bg-76.519fa4e0.png" sizes="76x76"><link rel="icon" href="logo-bg-96.0b892ec6.png" sizes="96x96"><link rel="icon" href="logo-bg-128.8e531d34.png" sizes="128x128"><link rel="icon" href="logo-bg-192.c65d6b09.png" sizes="192x192"><link rel="icon" href="logo-bg-228.2d2766b3.png" sizes="228x228"></head><body> <header> <h1 class="title"><a href="//www.coem-lang.org">Coem</a></h1> <button class="navToggle" aria-label="Toggle menu">☰</button> <nav class="nav"> <ul class="nav__items"> <li class="nav__item"><a href="//www.coem-lang.org">Home</a></li> <li class="nav__item"><a href="//www.coem-lang.org/about">About</a></li> <li class="nav__item"><a href="//www.coem-lang.org/examples">Examples</a></li> <li class="nav__item"><a href="//www.coem-lang.org/reference">Reference</a></li> <li class="nav__item"><a href="//editor.coem-lang.org">Editor</a></li> </ul> </nav> </header> <main>    <div class="editorHeader"> <h2 class="filename"><span class="filename-title" contenteditable="">Reminder</span><span class="filename-ext">.coem</span></h2> <button id="reflectBtn">Reflect</button> </div> <div class="code"> <div class="editor" id="editor"></div>   </div> </main> <footer> <p><small>A project by <a href="https://whykatherine.github.io">Katherine Yang</a>. Contribute on <a href="https://github.com/coem">GitHub</a>.</small></p> </footer> <div class="shortcuts"> <div class="backdrop"></div> <div class="window"> <h1>Keyboard Shortcuts</h1> <dl> <div> <dt><code>—</code> (em dash)</dt> <dd><kbd>Option</kbd><kbd>Shift</kbd><kbd>-</kbd></dd> </div> <div> <dt><code>†</code> (dagger)</dt> <dd><kbd>Option</kbd><kbd>T</kbd></dd> </div> </dl> </div> </div> <script src="https://cdn.jsdelivr.net/gh/coem-lang/jscoem@189c38018f6bf44617c6b4d57c72a660466f8d5d/dist/coem.js"></script> <script src="index.50c4fbbe.js" type="module"></script> <script src="index.656f2629.js" type="module"></script> </body></html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coem | Editor</title>
+    <meta name="description" content="Web editor for Coem, a poetic programing language.">
+    <link href="//fonts.cdnfonts.com/css/ibm-plex-serif-2" rel="stylesheet">
+    <link href="//fonts.cdnfonts.com/css/ibm-plex-mono-3" rel="stylesheet">
+    <link href="//fonts.cdnfonts.com/css/ibm-plex-sans-condensed-3" rel="stylesheet">
+    <link rel="stylesheet" href="/index.dd77382c.css">
+
+    <!-- favicon -->
+    <link rel="icon" href="/logo-bg-32.7c795471.png" sizes="32x32">
+    <link rel="icon" href="/logo-bg-57.1b74a8ac.png" sizes="57x57">
+    <link rel="icon" href="/logo-bg-76.805abda5.png" sizes="76x76">
+    <link rel="icon" href="/logo-bg-96.cf08e7ce.png" sizes="96x96">
+    <link rel="icon" href="/logo-bg-128.ee002923.png" sizes="128x128">
+    <link rel="icon" href="/logo-bg-192.ed7037ac.png" sizes="192x192">
+    <link rel="icon" href="/logo-bg-228.dcb0184f.png" sizes="228x228">
+  </head>
+  <body>
+    <header>
+      <h1 class="title"><a href="//www.coem-lang.org">Coem</a></h1>
+      <button class="navToggle" aria-label="Toggle menu">☰</button>
+      <nav class="nav">
+        <ul class="nav__items">
+          <li class="nav__item"><a href="//www.coem-lang.org">Home</a></li>
+          <li class="nav__item"><a href="//www.coem-lang.org/about">About</a></li>
+          <li class="nav__item"><a href="//www.coem-lang.org/examples">Examples</a></li>
+          <li class="nav__item"><a href="//www.coem-lang.org/reference">Reference</a></li>
+          <li class="nav__item"><a href="//editor.coem-lang.org">Editor</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+
+      <!-- adapted from the p5.js editor -->
+      <!-- <nav class="editor-nav">
+        <ul class="nav__items">
+          <li class="nav__item">
+            <button>
+              <span class="nav__item-header">File</span>
+            </button>
+            <ul class="nav__dropdown">
+              <li class="nav__dropdown-item">
+                <button id="newBtn">New</button>
+              </li>
+              <li class="nav__dropdown-item">
+                <button>Save</button>
+              </li>
+              <li class="nav__dropdown-item">
+                <button>Examples</button>
+              </li>
+            </ul>
+          </li>
+          <li class="nav__item">
+            <button>
+              <span class="nav__item-header">Edit</span>
+            </button>
+            <ul class="nav__dropdown">
+              <li class="nav__dropdown-item">
+                <button>Find</button>
+              </li>
+              <li class="nav__dropdown-item">
+                <button>Replace</button>
+              </li>
+            </ul>
+          </li>
+          <li class="nav__item">
+            <button>
+              <span class="nav__item-header">Help</span>
+            </button>
+            <ul class="nav__dropdown">
+              <li class="nav__dropdown-item">
+                <button>Keyboard Shortcuts</button>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav> -->
+
+      <!-- <div class="toc">
+        <ul class="toc__items">
+          <li class="toc__item">
+            <button value="Looking">
+              <span class="filename"><span class="filename-title">Looking</span><span class="filename-ext">.coem</span></span>
+            </button>
+          </li>
+          <li class="toc__item">
+            <button value="Sleep">
+              <span class="filename"><span class="filename-title">Sleep</span><span class="filename-ext">.coem</span></span>
+            </button>
+          </li>
+          <li class="toc__item">
+            <button value="New">
+              <span class="filename"><span class="filename-title">New</span><span class="filename-ext">.coem</span></span>
+            </button>
+          </li>
+        </ul>
+      </div> -->
+
+      <div class="editorHeader">
+        <div>
+          <h2 class="filename"><span class="filename-title" contenteditable="">Reminder</span><span class="filename-ext">.coem</span></h2>
+          <button id="reflectBtn">Reflect</button>
+        </div>
+        <div class="formatting">
+          <div>
+            <button class="formattingBtn" id="clearBtn">Clear</button>
+          </div>
+          <!-- <div>
+            <button class="formattingBtn" id="indentBtn">Indent</button>
+            <button class="formattingBtn" id="dedentBtn">Dedent</button>
+          </div> -->
+          <div class="commentBtns">
+            <button class="formattingBtn" id="commentBtn">†</button>
+          </div>
+          <div class="operatorBtns">
+            <button class="formattingBtn" id="dashBtn">—</button>
+            <button class="formattingBtn" id="colonBtn">:</button>
+            <button class="formattingBtn" id="ampersandBtn">&</button>
+          </div>
+          <div class="stringBtns">
+            <button class="formattingBtn" id="openQuoteBtn">“</button>
+            <button class="formattingBtn" id="closeQuoteBtn">”</button>
+          </div>
+          <div class="regexBtns">
+            <button class="formattingBtn" id="pipeBtn">|</button>
+            <button class="formattingBtn" id="openParenBtn">(</button>
+            <button class="formattingBtn" id="closeParenBtn">)</button>
+            <button class="formattingBtn" id="questionBtn">?</button>
+            <button class="formattingBtn" id="asteriskBtn">*</button>
+            <button class="formattingBtn" id="plusBtn">+</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="code">
+        <div class="editor" id="editor"></div>
+        <!-- <div class="output"></div> -->
+        <!-- <div class="console"></div> -->
+      </div>
+
+    </main>
+
+    <footer>
+      <p><small>A project by <a href="https://whykatherine.github.io">Katherine Yang</a>. Contribute on <a href="https://github.com/coem">GitHub</a>.</small></p>
+    </footer>
+
+    <div class="shortcuts">
+      <div class="backdrop"></div>
+      <div class="window">
+        <h1>Keyboard Shortcuts</h1>
+        <dl>
+          <div>
+            <dt><code>—</code> (em dash)</dt>
+            <dd><kbd>Option</kbd><kbd>Shift</kbd><kbd>-</kbd></dd>
+          </div>
+          <div>
+            <dt><code>†</code> (dagger)</dt>
+            <dd><kbd>Option</kbd><kbd>T</kbd></dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/gh/coem-lang/jscoem@189c38018f6bf44617c6b4d57c72a660466f8d5d/dist/coem.js"></script>
+    <script src="/index.09092b6e.js" defer=""></script>
+    <script src="/index.56c5e9e4.js" defer=""></script>
+  </body>
+</html>
