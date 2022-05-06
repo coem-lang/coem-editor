@@ -1,7 +1,7 @@
 import { view } from './codemirror/setup.js';
 
 const navToggle = document.querySelector(".navToggle"),
-  nav = document.querySelector(".nav")
+  nav = document.querySelector(".nav"),
   menuHeaderBtns = document.querySelectorAll(".nav__item > button"),
   menuBtns = document.querySelectorAll(".nav__dropdown-item > button"),
   filenameTitle = document.querySelector(".filename-title"),
