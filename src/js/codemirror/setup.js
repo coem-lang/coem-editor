@@ -20,16 +20,7 @@ import { curlyQuotes, replaceQuoteKeymap, triggerCloseQuotes } from './curlyquot
 import { emDash, replaceHyphenKeymap, triggerCloseBrackets } from './emdash';
 
 const initialState = EditorState.create({
-  doc: '† this is a reminder\n\
-\n\
-to breathing——:\n\
-    † in and out, and thus to\n\
-    know—myself—\n\
-    & nothing.\n\
-\n\
-let me|myself|I be “present”\n\
-while—I am “present”—:\n\
-    let me be breathing——.',
+  doc: '',
   extensions: [
     lineNumbers(),
     highlightActiveLineGutter(),
@@ -70,27 +61,5 @@ const view = new EditorView({
   parent: document.getElementById('editor'),
   state: initialState
 });
-
-document.querySelector("#clearBtn").addEventListener("click", e => {
-  view.dispatch({ changes: { from: 0, to: view.state.doc.length, insert: "" } });
-  view.focus();
-});
-document.querySelector("#commentBtn").addEventListener("click", () => insert("† "));
-document.querySelector("#dashBtn").addEventListener("click", () => insert("—"));
-document.querySelector("#colonBtn").addEventListener("click", () => insert(":"));
-document.querySelector("#ampersandBtn").addEventListener("click", () => insert("&"));
-document.querySelector("#openQuoteBtn").addEventListener("click", () => insert("“"));
-document.querySelector("#closeQuoteBtn").addEventListener("click", () => insert("”"));
-document.querySelector("#pipeBtn").addEventListener("click", () => insert("|"));
-document.querySelector("#openParenBtn").addEventListener("click", () => insert("("));
-document.querySelector("#closeParenBtn").addEventListener("click", () => insert(")"));
-document.querySelector("#questionBtn").addEventListener("click", () => insert("?"));
-document.querySelector("#asteriskBtn").addEventListener("click", () => insert("*"));
-document.querySelector("#plusBtn").addEventListener("click", () => insert("+"));
-
-function insert(str) {
-  view.dispatch(view.state.replaceSelection(str));
-  view.focus();
-}
 
 export { view };

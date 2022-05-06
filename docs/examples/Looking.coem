@@ -1,0 +1,25 @@
+let me|I
+let me be “looking”
+print—I am “found”—
+
+let se(e|a) be “blue”
+print—see, sea—
+
+let mis(t|sed) be “thick”
+print—mist, missed—
+
+let mou?rning be “dark”
+print—morning is mourning—
+
+let answer be nothing
+    print—answer—
+let answer be “this”
+    print—answer—
+let answer be “that”
+    print—answer—
+let answer be 42
+    print—answer—
+
+let you be “here”
+let answer be you
+print—answer—

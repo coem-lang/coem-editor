@@ -9,7 +9,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "parcel --dist-dir docs/",
-    "build": "rm -rf docs/ && parcel build --dist-dir docs/ --public-url ./ && cp src/CNAME docs/CNAME"
+    "build": "rm -rf docs/ && parcel build --dist-dir docs/ --public-url ./ && cp src/CNAME docs/CNAME && cp -r src/examples docs/"
   },
   "repository": {
     "type": "git",

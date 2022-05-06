@@ -37,7 +37,7 @@
     <main>
 
       <!-- adapted from the p5.js editor -->
-      <!-- <nav class="editor-nav">
+      <nav class="editor-nav">
         <ul class="nav__items">
           <li class="nav__item">
             <button>
@@ -47,24 +47,27 @@
               <li class="nav__dropdown-item">
                 <button id="newBtn">New</button>
               </li>
-              <li class="nav__dropdown-item">
-                <button>Save</button>
-              </li>
-              <li class="nav__dropdown-item">
-                <button>Examples</button>
-              </li>
             </ul>
           </li>
           <li class="nav__item">
             <button>
-              <span class="nav__item-header">Edit</span>
+              <span class="nav__item-header">Examples</span>
             </button>
             <ul class="nav__dropdown">
-              <li class="nav__dropdown-item">
-                <button>Find</button>
+              <li class="nav__dropdown-item example-item">
+                <button value="Looking">Looking<span class="filename-ext">.coem</span></button>
               </li>
-              <li class="nav__dropdown-item">
-                <button>Replace</button>
+              <li class="nav__dropdown-item example-item">
+                <button value="Sleep">Sleep<span class="filename-ext">.coem</span></button>
+              </li>
+              <li class="nav__dropdown-item example-item">
+                <button value="Anew">Anew<span class="filename-ext">.coem</span></button>
+              </li>
+              <li class="nav__dropdown-item example-item">
+                <button value="Reminder">Reminder<span class="filename-ext">.coem</span></button>
+              </li>
+              <li class="nav__dropdown-item example-item">
+                <button value="Woman">Woman<span class="filename-ext">.coem</span></button>
               </li>
             </ul>
           </li>
@@ -74,34 +77,14 @@
             </button>
             <ul class="nav__dropdown">
               <li class="nav__dropdown-item">
-                <button>Keyboard Shortcuts</button>
+                <button id="regexBtn">RegEx</button>
               </li>
             </ul>
           </li>
         </ul>
-      </nav> -->
+      </nav>
 
-      <!-- <div class="toc">
-        <ul class="toc__items">
-          <li class="toc__item">
-            <button value="Looking">
-              <span class="filename"><span class="filename-title">Looking</span><span class="filename-ext">.coem</span></span>
-            </button>
-          </li>
-          <li class="toc__item">
-            <button value="Sleep">
-              <span class="filename"><span class="filename-title">Sleep</span><span class="filename-ext">.coem</span></span>
-            </button>
-          </li>
-          <li class="toc__item">
-            <button value="New">
-              <span class="filename"><span class="filename-title">New</span><span class="filename-ext">.coem</span></span>
-            </button>
-          </li>
-        </ul>
-      </div> -->
-
-      <div class="editorHeader">
+      <div class="editor-header">
         <div>
           <h2 class="filename"><span class="filename-title" contenteditable>Reminder</span><span class="filename-ext">.coem</span></h2>
           <button id="reflectBtn">Reflect</button>
@@ -149,20 +132,15 @@
       <p><small>A project by <a href="https://whykatherine.github.io">Katherine Yang</a>. Contribute on <a href="https://github.com/coem">GitHub</a>.</small></p>
     </footer>
 
-    <div class="shortcuts">
+    <div class="regex">
       <div class="backdrop"></div>
       <div class="window">
-        <h1>Keyboard Shortcuts</h1>
-        <dl>
-          <div>
-            <dt><code>—</code> (em dash)</dt>
-            <dd><kbd>Option</kbd><kbd>Shift</kbd><kbd>-</kbd></dd>
-          </div>
-          <div>
-            <dt><code>†</code> (dagger)</dt>
-            <dd><kbd>Option</kbd><kbd>T</kbd></dd>
-          </div>
-        </dl>
+        <h1>RegEx</h1>
+        <p><span class="identifier">me|myself|i</span> matches <span class="identifier">me</span>, <span class="identifier">myself</span>, and <span class="identifier">i</span>.</p>
+        <p><span class="identifier">me(e|a)t</span> matches both <span class="identifier">meet</span> and <span class="identifier">meat</span>.</p>
+        <p><span class="identifier">bookmar?king</span> matches both <span class="identifier">bookmarking</span> and <span class="identifier">bookmaking</span>.</p>
+        <p><span class="identifier">be+</span> matches <span class="identifier">be</span>, <span class="identifier">bee</span>, <span class="identifier">beee</span>, <span class="identifier">beeeee</span>, and so on.</p>
+        <p><span class="identifier">q(ue)*</span> matches <span class="identifier">q</span>, <span class="identifier">que</span>, <span class="identifier">queue</span>, <span class="identifier">queueue</span>, and so on.</p>
       </div>
     </div>
 

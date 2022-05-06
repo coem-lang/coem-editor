@@ -1,31 +1,27 @@
 import { view } from './codemirror/setup.js';
 
-const menuBtns = document.querySelectorAll(".nav__item > button"),
-  outputArea = document.querySelector(".output"),
-  consoleArea = document.querySelector(".console"),
-  filenameTitle = document.querySelector("h2 .filename-title"),
-  tocItems = document.querySelector(".toc__items"),
-  tocBtns = document.querySelectorAll(".toc__item button"),
-  newBtn = document.querySelector("#newBtn"),
-  reflectBtn = document.querySelector("#reflectBtn");
-let editor,
-  isMenuOpen = false,
-  currentTitle = "Untitled",
-  output = "";
+const navToggle = document.querySelector(".navToggle"),
+  nav = document.querySelector(".nav")
+  menuHeaderBtns = document.querySelectorAll(".nav__item > button"),
+  menuBtns = document.querySelectorAll(".nav__dropdown-item > button"),
+  filenameTitle = document.querySelector(".filename-title"),
+  exampleBtns = document.querySelectorAll(".example-item button"),
+  regex = document.querySelector(".regex");
+let isMenuOpen = false;
 
-// MENU
+// MENU HEADERS
 
-function onMenuBtnClick(e) {
+function onMenuHeaderClick(e) {
   e.preventDefault();
   let btn = e.currentTarget;
   isMenuOpen = btn.parentElement.classList.toggle("nav__item--open");
 }
 
-function onMenuBtnMouseover(e) {
+function onMenuHeaderMouseover(e) {
   e.preventDefault();
   let btn = e.currentTarget;
   if (isMenuOpen) {
-    for (let b of menuBtns) {
+    for (let b of menuHeaderBtns) {
       b.parentElement.classList.remove("nav__item--open");
     }
     btn.parentElement.classList.add("nav__item--open");
@@ -33,75 +29,53 @@ function onMenuBtnMouseover(e) {
   }
 }
 
-function onMenuBtnBlur(e) {
+function onMenuHeaderBlur(e) {
   // e.preventDefault();
   // let btn = e.currentTarget;
   // btn.parentElement.classList.remove("nav__item--open");
 }
 
-function onNewBtnClick(e) {
+// MENU BTNS
+
+function onMenuBtnClick(e) {
   e.preventDefault();
+  isMenuOpen = false;
   let btn = e.currentTarget;
   btn.parentElement.parentElement.parentElement.classList.remove("nav__item--open");
-  isMenuOpen = false;
-  createNewFile();
 }
 
-function clear() {
-  view.dispatch({
-    changes: {from: 0, to: view.state.doc.length, insert: ""}
-  });
-  outputArea.innerHTML = "";
-  for (let btn of tocBtns) {
-    btn.parentElement.classList.remove("current");
-  }
+function newFile() {
+  setDoc("");
+  filenameTitle.innerText = "Untitled";
 }
 
-function createNewFile() {
-  clear();
-  let tocItem = document.querySelector(".toc__item").cloneNode(true);
-  filenameTitle.innerHTML = "Untitled";
-  currentTitle = filenameTitle;
-  tocItem.querySelector(".filename-title").innerHTML = "Untitled";
-  tocItems.appendChild(tocItem);
-}
-
-// TOC
-
-function onTocBtnClick(e) {
-  e.preventDefault();
+function loadExample(e) {
   let filename = e.target.value;
   load(filename);
 }
 
-// LOAD
-
 function load(filename) {
-  Promise.all([
-    fetch("/examples/" + filename + ".coem"),
-    fetch("/examples/" + filename + ".output")
-  ])
-  .then(results => Promise.all(results.map(r => r.text())))
-  .then(([coem, output]) => {
-    editor.getDoc().setValue(coem);
-    outputArea.innerHTML = output;
-    filenameTitle.innerHTML = filename;
-    currentTitle = filenameTitle;
-    for (let btn of tocBtns) {
-      btn.parentElement.classList.remove("current");
-    }
-    document.querySelector("button[value=\"" + filename + "\"]").parentElement.classList.add("current");
+  fetch("./examples/" + filename + ".coem")
+  .then(r => r.text())
+  .then((code) => {
+    setDoc(code);
+    filenameTitle.innerText = filename;
   })
   .catch(err => console.log(err));
+}
+
+function openPopup(e) {
+  regex.classList.add("visible");
+}
+
+function closePopup(e) {
+  regex.classList.remove("visible");
 }
 
 // REFLECT
 
 function handleError(e, source = "") {
-  if (!e) {
-    consoleArea.innerHTML = "";
-    return null;
-  }
+  if (!e) return null;
   console.error(e);
   const { oneLiner, preErrorSection, errorSection, postErrorSection } = formatCoemError(e, source);
   let errorStr = oneLiner;
@@ -109,13 +83,6 @@ function handleError(e, source = "") {
     errorStr += '<br />';
     errorStr += `${preErrorSection}<span class="error">${errorSection}</span>${postErrorSection}`;
   }
-  consoleArea.innerHTML = errorStr;
-}
-
-function handleOutput(txt) {
-  output += txt + '\n';
-  console.log(txt);
-  outputArea.innerHTML = output;
 }
 
 function reflect() {
@@ -125,44 +92,87 @@ function reflect() {
   const browserEnv = new Environment();
   output = "";
   try {
-    run(source, browserEnv, handleOutput);
+    // run(source, browserEnv, handleOutput);
+    run(source, browserEnv);
     handleError(null);
   } catch (e) {
     handleError(e, source);
   }
 }
 
+// CHARACTER INPUT
+
+function insert(str) {
+  view.dispatch(view.state.replaceSelection(str));
+  view.focus();
+}
+
+function setDoc(str) {
+  view.dispatch({ changes: { from: 0, to: view.state.doc.length, insert: str } });
+  view.focus();
+}
+
 // MAIN
 
 document.addEventListener("DOMContentLoaded", () => {
-  // load("Looking");
+  load("Reminder");
 
-  // menuBtns.forEach(button => {
-  //   button.addEventListener("click", onMenuBtnClick);
-  //   button.addEventListener("mouseover", onMenuBtnMouseover);
-  //   button.addEventListener("blur", onMenuBtnBlur);
-  // });
+  // nav
+  navToggle.addEventListener("click", e => {
+    e.preventDefault();
+    if (nav.classList.toggle("open")) {
+      navToggle.innerText = "×";
+    } else {
+      navToggle.innerText = "☰";
+    }
+    document.body.classList.toggle("navIsOpen");
+  });
 
-  // newBtn.addEventListener("click", onNewBtnClick);
+  // menu headers
+  menuHeaderBtns.forEach(btn => {
+    btn.addEventListener("click", onMenuHeaderClick);
+    btn.addEventListener("mouseover", onMenuHeaderMouseover);
+    btn.addEventListener("blur", onMenuHeaderBlur);
+  });
+
+  // menu buttons
+  menuBtns.forEach(btn => {
+    btn.addEventListener("click", onMenuBtnClick);
+  })
+
+  // new
+  document.querySelector("#newBtn").addEventListener("click", newFile);
   
-  // tocBtns.forEach(btn => {
-  //   btn.addEventListener("click", onTocBtnClick);
-  // });
+  // examples
+  exampleBtns.forEach(btn => {
+    btn.addEventListener("click", loadExample);
+  });
 
-  reflectBtn.addEventListener("click", reflect);
+  // regex
+  document.querySelector("#regexBtn").addEventListener("click", openPopup);
+  document.querySelector(".backdrop").addEventListener("click", closePopup);
+
+  // reflect
+  document.querySelector("#reflectBtn").addEventListener("click", reflect);
+
+  // character input
+  document.querySelector("#clearBtn").addEventListener("click", () => setDoc(""));
+  document.querySelector("#commentBtn").addEventListener("click", () => insert("† "));
+  document.querySelector("#dashBtn").addEventListener("click", () => insert("—"));
+  document.querySelector("#colonBtn").addEventListener("click", () => insert(":"));
+  document.querySelector("#ampersandBtn").addEventListener("click", () => insert("&"));
+  document.querySelector("#openQuoteBtn").addEventListener("click", () => insert("“"));
+  document.querySelector("#closeQuoteBtn").addEventListener("click", () => insert("”"));
+  document.querySelector("#pipeBtn").addEventListener("click", () => insert("|"));
+  document.querySelector("#openParenBtn").addEventListener("click", () => insert("("));
+  document.querySelector("#closeParenBtn").addEventListener("click", () => insert(")"));
+  document.querySelector("#questionBtn").addEventListener("click", () => insert("?"));
+  document.querySelector("#asteriskBtn").addEventListener("click", () => insert("*"));
+  document.querySelector("#plusBtn").addEventListener("click", () => insert("+"));
 });
 
-// NAV
-
-const navToggle = document.querySelector(".navToggle");
-const nav = document.querySelector(".nav");
-
-navToggle.addEventListener("click", e => {
-  e.preventDefault();
-  if (nav.classList.toggle("open")) {
-    navToggle.innerText = "×";
-  } else {
-    navToggle.innerText = "☰";
+document.addEventListener("keydown", e => {
+  if (e.code === "Escape" && regex.classList.contains("visible")) {
+    regex.classList.remove("visible");
   }
-  document.body.classList.toggle("navIsOpen");
 });
