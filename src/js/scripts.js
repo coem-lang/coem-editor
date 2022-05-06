@@ -90,10 +90,10 @@ function reflect() {
   const source = view.state.doc.toString();
   console.log(source);
   const browserEnv = new Environment();
-  output = "";
   try {
     // run(source, browserEnv, handleOutput);
-    run(source, browserEnv);
+    let echo = run(source, browserEnv);
+    setDoc(echo);
     handleError(null);
   } catch (e) {
     handleError(e, source);

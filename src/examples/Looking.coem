@@ -17,7 +17,7 @@ let answer be “this”
     print—answer—
 let answer be “that”
     print—answer—
-let answer be 42
+let answer be “fortytwo”
     print—answer—
 
 let you be “here”
