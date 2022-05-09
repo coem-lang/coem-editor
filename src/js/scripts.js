@@ -50,7 +50,7 @@ function newFile() {
 }
 
 function loadExample(e) {
-  let filename = e.target.value;
+  let filename = e.currentTarget.value;
   load(filename);
 }
 
