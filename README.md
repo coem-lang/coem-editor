@@ -4,6 +4,12 @@ The interactive web editor for the Coem language.
 
 ## Setup
 
+Install packages:
+
+```
+npm install
+```
+
 Start development server (with hot reloading):
 
 ```
