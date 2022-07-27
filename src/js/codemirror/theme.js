@@ -6,8 +6,6 @@ export const myTheme = EditorView.baseTheme({
     fontSize: "24px"
   },
   "&": {
-    // width: "500px",
-    // height: "300px"
     backgroundColor: "#f9f9f9",
     padding: "1em"
   },
@@ -25,7 +23,7 @@ export const myTheme = EditorView.baseTheme({
   ".cm-gutterElement": {
     padding: "2px 20px 0 5px !important"
   },
-  "&.cm-focused .cm-matchingBracket, & .cm-matchingBracket": {
-    backgroundColor: "#00000011 !important"
+  ".cm-selectionMatch": {
+    backgroundColor: "#e9e8f2 !important"
   }
 });
