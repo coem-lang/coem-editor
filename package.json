@@ -8,7 +8,7 @@
   "source": "src/index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "parcel --dist-dir docs/",
+    "start": "cp -r src/examples docs/ parcel --dist-dir docs/",
     "build": "rm -rf docs/ && parcel build --dist-dir docs/ --public-url ./ && cp src/CNAME docs/CNAME && cp -r src/examples docs/"
   },
   "repository": {
