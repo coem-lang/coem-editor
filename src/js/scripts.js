@@ -72,7 +72,7 @@ function closePopup(e) {
   regex.classList.remove("visible");
 }
 
-// REFLECT
+// ECHO
 
 function handleError(e, source = "") {
   if (!e) return null;
@@ -85,7 +85,7 @@ function handleError(e, source = "") {
   }
 }
 
-function reflect() {
+function echo() {
   // https://github.com/danman113/YALI.js/blob/master/browser.js
   const source = view.state.doc.toString();
   console.log(source);
@@ -152,8 +152,8 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelector("#regexBtn").addEventListener("click", openPopup);
   document.querySelector(".backdrop").addEventListener("click", closePopup);
 
-  // reflect
-  document.querySelector("#reflectBtn").addEventListener("click", reflect);
+  // echo
+  document.querySelector("#echoBtn").addEventListener("click", echo);
 
   // character input
   document.querySelector("#clearBtn").addEventListener("click", () => setDoc(""));

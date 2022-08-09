@@ -582,7 +582,7 @@ function openPopup(e) {
 function closePopup(e) {
     regex.classList.remove("visible");
 }
-// REFLECT
+// ECHO
 function handleError(e, source = "") {
     if (!e) return null;
     console.error(e);
@@ -593,15 +593,15 @@ function handleError(e, source = "") {
         errorStr += `${preErrorSection}<span class="error">${errorSection}</span>${postErrorSection}`;
     }
 }
-function reflect() {
+function echo() {
     // https://github.com/danman113/YALI.js/blob/master/browser.js
     const source = (0, _setupJs.view).state.doc.toString();
     console.log(source);
     const browserEnv = new Environment();
     try {
         // run(source, browserEnv, handleOutput);
-        let echo = run(source, browserEnv);
-        setDoc(echo);
+        let echo1 = run(source, browserEnv);
+        setDoc(echo1);
         handleError(null);
     } catch (e) {
         handleError(e, source);
@@ -651,8 +651,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
     // regex
     document.querySelector("#regexBtn").addEventListener("click", openPopup);
     document.querySelector(".backdrop").addEventListener("click", closePopup);
-    // reflect
-    document.querySelector("#reflectBtn").addEventListener("click", reflect);
+    // echo
+    document.querySelector("#echoBtn").addEventListener("click", echo);
     // character input
     document.querySelector("#clearBtn").addEventListener("click", ()=>setDoc(""));
     document.querySelector("#commentBtn").addEventListener("click", ()=>insert("\u2020 "));
