@@ -14,7 +14,7 @@ let isMenuOpen = false;
 function onMenuHeaderClick(e) {
   e.preventDefault();
   let btn = e.currentTarget;
-  isMenuOpen = btn.parentElement.classList.toggle("nav__item--open");
+  isMenuOpen = btn.closest(".nav__item")?.classList.toggle("nav__item--open");
 }
 
 function onMenuHeaderMouseover(e) {
@@ -22,15 +22,20 @@ function onMenuHeaderMouseover(e) {
   let btn = e.currentTarget;
   if (isMenuOpen) {
     for (let b of menuHeaderBtns) {
-      b.parentElement.classList.remove("nav__item--open");
+      b.closest(".nav__item")?.classList.remove("nav__item--open");
     }
-    btn.parentElement.classList.add("nav__item--open");
+    btn.closest(".nav__item")?.classList.add("nav__item--open");
     btn.focus();
   }
 }
 
 function onMenuHeaderBlur(e) {
-  // e.preventDefault();
+  e.preventDefault();
+  const open = document.querySelector(".nav__item--open");
+  if (open) {
+    open.classList.remove("nav__item--open");
+  }
+  isMenuOpen = false;
   // let btn = e.currentTarget;
   // btn.parentElement.classList.remove("nav__item--open");
 }
@@ -41,7 +46,7 @@ function onMenuBtnClick(e) {
   e.preventDefault();
   isMenuOpen = false;
   let btn = e.currentTarget;
-  btn.parentElement.parentElement.parentElement.classList.remove("nav__item--open");
+  btn.closest(".nav__item")?.classList.remove("nav__item--open");
 }
 
 function newFile() {
@@ -132,7 +137,6 @@ document.addEventListener("DOMContentLoaded", () => {
   menuHeaderBtns.forEach(btn => {
     btn.addEventListener("click", onMenuHeaderClick);
     btn.addEventListener("mouseover", onMenuHeaderMouseover);
-    btn.addEventListener("blur", onMenuHeaderBlur);
   });
 
   // menu buttons
@@ -172,7 +176,34 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener("keydown", e => {
-  if (e.code === "Escape" && regex.classList.contains("visible")) {
-    regex.classList.remove("visible");
+  if (e.code === "Escape") {
+    if (regex.classList.contains("visible")) {
+      regex.classList.remove("visible");
+    }
+    if (isMenuOpen) {
+      const open = document.querySelector(".nav__item--open");
+      if (open) {
+        open.classList.remove("nav__item--open");
+      }
+      isMenuOpen = false;
+    }
+  }
+
+  if (e.code === "ArrowLeft" || e.code === "ArrowRight") {
+    const open = document.querySelector(".nav__item--open");
+    if (open) {
+      const others = document.querySelectorAll(".nav__item");
+      const index = Array.from(others).indexOf(open);
+      let changeTo = null;
+      if (e.code === "ArrowLeft" && index > 0) {
+        changeTo = others[index - 1];
+      } else if (e.code === "ArrowRight" && index < others.length - 1) {
+        changeTo = others[index + 1];
+      }
+      if (changeTo) {
+        open.classList.remove("nav__item--open");
+        changeTo.classList.add("nav__item--open");
+      }
+    }
   }
 });
