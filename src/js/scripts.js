@@ -83,7 +83,7 @@ function saveFile() {
   const a = document.createElement("a");
   a.href = url;
   const title = filenameTitle.innerText;
-  a.download = `${title}.txt`;
+  a.download = `${title}.coem`;
   a.click();
 }
 
@@ -93,7 +93,8 @@ function loadExample(e) {
 }
 
 function load(filename) {
-  fetch("./examples/" + filename + ".coem")
+  const path = "./examples/" + filename + ".coem";
+  fetch(path)
   .then(r => r.text())
   .then((code) => {
     setDoc(code);
