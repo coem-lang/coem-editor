@@ -53,7 +53,8 @@ const initialState = EditorState.create({
     indentUnit.of("    "),
     coem(),
     myTheme,
-    myHighlightStyle
+    myHighlightStyle,
+    EditorView.lineWrapping
   ]
 });
 
