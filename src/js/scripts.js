@@ -83,7 +83,7 @@ function exportFile() {
   const a = document.createElement("a");
   a.href = url;
   const title = filenameTitle.innerText;
-  a.download = `${title}.coem`;
+  a.download = `${title}.coem.txt`;
   a.click();
 }
 
