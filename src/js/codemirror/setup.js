@@ -9,7 +9,8 @@ import {defaultKeymap} from "@codemirror/commands"
 import {bracketMatching} from "./matchbrackets"
 // import {closeBrackets, closeBracketsKeymap} from "@codemirror/closebrackets"
 import {closeBrackets, closeBracketsKeymap} from "./closebrackets"
-import {searchKeymap, highlightSelectionMatches} from "@codemirror/search"
+// import {searchKeymap, highlightSelectionMatches} from "@codemirror/search"
+import {highlightSelectionMatches} from "@codemirror/search"
 import {commentKeymap} from "@codemirror/comment"
 import {rectangularSelection} from "@codemirror/rectangular-selection"
 import {lintKeymap} from "@codemirror/lint"
@@ -42,7 +43,7 @@ const initialState = EditorState.create({
     keymap.of([
       ...closeBracketsKeymap,
       ...defaultKeymap,
-      ...searchKeymap,
+      // ...searchKeymap,
       ...historyKeymap,
       ...commentKeymap,
       ...lintKeymap,
