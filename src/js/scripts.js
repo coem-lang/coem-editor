@@ -76,7 +76,7 @@ function loadFile() {
   input.click();
 }
 
-function saveFile() {
+function exportFile() {
   const text = view.state.doc.toString();
   const blob = new Blob([text], { type: "text/plain;charset=UTF-8" });
   const url = URL.createObjectURL(blob);
@@ -181,7 +181,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // file buttons
   document.querySelector("#newBtn").addEventListener("click", newFile);
   document.querySelector("#loadBtn").addEventListener("click", loadFile);
-  document.querySelector("#saveBtn").addEventListener("click", saveFile);
+  document.querySelector("#exportBtn").addEventListener("click", exportFile);
   
   // examples
   exampleBtns.forEach(btn => {
