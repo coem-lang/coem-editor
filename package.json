@@ -9,7 +9,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "rm -rf docs/ && mkdir docs/ && cp -r src/examples docs/ && parcel --dist-dir docs/",
-    "build": "rm -rf docs/ && parcel build --dist-dir docs/ --public-url ./ && cp src/CNAME docs/CNAME && cp -r src/examples docs/"
+    "build": "rm -rf docs/ && mkdir docs/ && parcel build --dist-dir docs/ --public-url ./ && cp src/CNAME docs/CNAME && cp -r src/examples docs/"
   },
   "repository": {
     "type": "git",
