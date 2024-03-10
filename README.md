@@ -2,6 +2,8 @@
 
 The interactive web editor for the Coem language.
 
+![Badge for node.js.yml workflow](https://github.com/coem-lang/coem-editor/actions/workflows/node.js.yml/badge.svg)
+
 ## Setup
 
 Install packages:
