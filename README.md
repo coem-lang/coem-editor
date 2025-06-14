@@ -18,7 +18,7 @@ Start development server (with hot reloading):
 npm start
 ```
 
-Build to `/docs` (`/docs` not `/dist` so we can use GitHub Pages):
+Build to `/dist`:
 
 ```
 npm run build

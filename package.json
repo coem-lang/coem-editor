@@ -8,8 +8,8 @@
   "source": "src/index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "rm -rf docs/ && mkdir docs/ && cp -r src/examples docs/ && parcel --dist-dir docs/",
-    "build": "rm -rf docs/ && mkdir docs/ && parcel build --dist-dir docs/ --public-url ./ && cp src/CNAME docs/CNAME && cp -r src/examples docs/"
+    "start": "rm -rf dist/ && mkdir dist/ && cp -r src/examples dist/ && parcel --dist-dir dist/",
+    "build": "rm -rf dist/ && mkdir dist/ && parcel build --dist-dir dist/ --public-url ./ && cp src/CNAME dist/CNAME && cp -r src/examples dist/"
   },
   "repository": {
     "type": "git",
